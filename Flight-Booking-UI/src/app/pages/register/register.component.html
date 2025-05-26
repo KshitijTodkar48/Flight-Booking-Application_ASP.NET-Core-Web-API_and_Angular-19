@@ -1,0 +1,33 @@
+<div class="max-w-sm mx-auto mt-20 p-6 border rounded shadow">
+  <h2 class="text-xl font-bold mb-4 text-center">Register</h2>
+  <form (ngSubmit)="onSubmit()">
+    <input
+      class="input"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Username"
+      required
+    />
+    <input
+      class="input mt-2"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
+      required
+    />
+    <input
+      class="input mt-2"
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password"
+      required
+    />
+    <select class="input mt-2" [(ngModel)]="role" name="role" required>
+      <option value="" disabled selected>Select Role</option>
+      <option value="Passenger">Passenger</option>
+      <option value="Admin">Admin</option>
+    </select>
+    <button class="btn w-full mt-4" type="submit">Register</button>
+  </form>
+</div>

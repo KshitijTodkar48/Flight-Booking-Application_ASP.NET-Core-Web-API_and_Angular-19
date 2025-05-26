@@ -1,0 +1,26 @@
+<nav class="bg-gray-800 text-white p-4 shadow">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <a routerLink="/" class="text-lg font-bold">✈️ Flight Booking</a>
+
+    <div class="space-x-4">
+      <a routerLink="/flights" class="hover:underline">Flights</a>
+
+      <ng-container *ngIf="auth.isPassenger()">
+        <a routerLink="/my-bookings" class="hover:underline">My Bookings</a>
+      </ng-container>
+
+      <ng-container *ngIf="auth.isAdmin()">
+        <a routerLink="/admin" class="hover:underline">Admin</a>
+      </ng-container>
+
+      <ng-container *ngIf="auth.getToken(); else authLinks">
+        <button (click)="logout()" class="hover:underline">Logout</button>
+      </ng-container>
+
+      <ng-template #authLinks>
+        <a routerLink="/login" class="hover:underline">Login</a>
+        <a routerLink="/register" class="hover:underline">Register</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>

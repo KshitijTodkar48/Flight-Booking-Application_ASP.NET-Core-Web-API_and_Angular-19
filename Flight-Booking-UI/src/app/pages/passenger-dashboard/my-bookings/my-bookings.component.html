@@ -1,0 +1,20 @@
+<div class="max-w-4xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-6 text-center">My Bookings</h2>
+
+  <div *ngIf="bookings.length === 0" class="text-center text-gray-500">
+    No bookings found.
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div *ngFor="let booking of bookings" class="border p-4 rounded shadow">
+      <h3 class="font-semibold">Flight: {{ booking.flight.airline }}</h3>
+      <p>{{ booking.flight.departure }} → {{ booking.flight.arrival }}</p>
+      <p>Departure: {{ booking.flight.departureTime | date:'short' }}</p>
+      <p>Arrival: {{ booking.flight.arrivalTime | date:'short' }}</p>
+      <p>Seats: {{ booking.seatsBooked }}</p>
+      <button class="btn mt-2 w-full bg-red-600 hover:bg-red-700" (click)="cancelBooking(booking.id)">
+        Cancel Booking
+      </button>
+    </div>
+  </div>
+</div>
