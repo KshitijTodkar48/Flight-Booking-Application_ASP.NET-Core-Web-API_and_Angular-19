@@ -12,7 +12,7 @@
       <p>Departure: {{ booking.flight.departureTime | date:'short' }}</p>
       <p>Arrival: {{ booking.flight.arrivalTime | date:'short' }}</p>
       <p>Seats: {{ booking.seatsBooked }}</p>
-      <button class="btn mt-2 w-full bg-red-600 hover:bg-red-700" (click)="cancelBooking(booking.id)">
+      <button class="mt-2 w-full font-semibold text-white py-2 px-4 rounded bg-red-500 hover:bg-red-600 cursor-pointer" (click)="cancelBooking(booking.id)">
         Cancel Booking
       </button>
     </div>

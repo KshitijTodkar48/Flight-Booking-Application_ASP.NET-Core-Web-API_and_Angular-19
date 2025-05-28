@@ -20,8 +20,9 @@ export class LoginComponent {
     this.auth.login({ username: this.username, password: this.password }).subscribe({
       next: (res) => {
         this.auth.storeToken(res.token, res.role);
-        const route = res.role === 'Admin' ? '/admin' : '/passenger';
+        const route = res.role === 'Admin' ? '/admin' : '/';
         this.router.navigate([route]);
+        alert("Logged in successfully.");
       },
       error: () => alert('Invalid credentials'),
     });

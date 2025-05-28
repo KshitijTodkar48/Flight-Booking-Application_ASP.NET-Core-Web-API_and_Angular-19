@@ -21,7 +21,7 @@
       <button class="btn bg-blue-600 hover:bg-blue-700" (click)="submitFlight()">
         {{ editingId ? 'Update Flight' : 'Add Flight' }}
       </button>
-      <button *ngIf="editingId" class="btn bg-gray-500 hover:bg-gray-600" (click)="resetForm()">
+      <button *ngIf="editingId" class="text-white py-2 px-4 rounded bg-gray-500 hover:bg-gray-600" (click)="resetForm()">
         Cancel Edit
       </button>
     </div>
@@ -37,8 +37,8 @@
           <span class="text-sm text-gray-500">({{ f.departureTime | date:'short' }})</span>
         </div>
         <div class="space-x-2">
-          <button class="btn bg-yellow-500 hover:bg-yellow-600" (click)="editFlight(f)">Edit</button>
-          <button class="btn bg-red-600 hover:bg-red-700" (click)="deleteFlight(f.id)">Delete</button>
+          <button class="text-white py-2 px-4 rounded font-semibold bg-yellow-500 hover:bg-yellow-600" (click)="editFlight(f)">Edit</button>
+          <button class="text-white py-2 px-4 rounded font-semibold bg-red-600 hover:bg-red-700" (click)="deleteFlight(f.id)">Delete</button>
         </div>
       </li>
     </ul>

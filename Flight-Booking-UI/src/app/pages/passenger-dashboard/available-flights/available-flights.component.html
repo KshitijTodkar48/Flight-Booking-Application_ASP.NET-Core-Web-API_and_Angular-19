@@ -3,20 +3,25 @@
 
   <div *ngIf="flights.length === 0" class="text-center text-gray-500">No flights available.</div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div *ngFor="let flight of flights" class="border p-4 rounded shadow">
       <h3 class="text-lg font-semibold">{{ flight.airline }}</h3>
       <p>{{ flight.departure }} → {{ flight.arrival }}</p>
       <p>Departure: {{ flight.departureTime | date:'short' }}</p>
       <p>Arrival: {{ flight.arrivalTime | date:'short' }}</p>
       <p>Price: ₹{{ flight.price }}</p>
-      <button 
-        class="btn mt-2 w-full"
-        *ngIf="auth.isPassenger()"
-        (click)="book(flight.id)"
-        >
+      <div *ngIf="auth.isPassenger()" class="mt-3 space-y-2">
+          <input
+            type="number"
+            min="1"
+            [(ngModel)]="seatsToBook[flight.id]"
+            placeholder="No. of seats"
+            class="input text-gray-500"
+          />
+          <button class="btn w-full cursor-pointer" (click)="book(flight.id)">
             Book Now
-        </button>
+          </button>
+      </div>
 
     </div>
   </div>

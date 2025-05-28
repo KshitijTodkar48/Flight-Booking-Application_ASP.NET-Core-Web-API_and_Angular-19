@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { BookingService } from '../../../services/booking.service';
 import { AuthService } from '../../../services/auth.service';
 import { FlightService } from '../../../services/flight.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-available-flights',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './available-flights.component.html'
 })
 export class AvailableFlightsComponent implements OnInit {
@@ -26,8 +27,11 @@ export class AvailableFlightsComponent implements OnInit {
     });
   }
 
+  seatsToBook: { [flightId: number]: number } = {};
+
   book(flightId: number) {
-    this.bookingService.bookFlight(flightId).subscribe({
+    const seats = this.seatsToBook[flightId] || 1; // default to 1 seat if none entered
+    this.bookingService.bookFlight(flightId, seats).subscribe({
       next: () => alert('Flight booked successfully!'),
       error: () => alert('Booking failed or not authorized.')
     });
