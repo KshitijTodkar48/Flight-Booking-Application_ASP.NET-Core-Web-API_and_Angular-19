@@ -1,6 +1,6 @@
-<div class="max-w-sm mx-auto mb-10 p-6 border border-gray-300 rounded shadow-md">
-  <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
-  <form (ngSubmit)="onSubmit()">
+<div class="max-w-md mx-auto mb-10 p-10 h-80 border-gray-300 rounded-xl shadow-md bg-amber-50">
+  <h2 class="text-3xl font-bold mb-4 text-center">Login</h2>
+  <form (ngSubmit)="onSubmit()" class="flex flex-col justify-evenly h-[80%]">
     <input class="input" [(ngModel)]="username" name="username" placeholder="Username" required />
     <input class="input mt-2" type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
     <button class="btn w-full mt-4" type="submit">Login</button>

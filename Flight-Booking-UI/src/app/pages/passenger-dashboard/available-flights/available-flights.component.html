@@ -1,8 +1,8 @@
 <div class="max-w-6xl mx-auto mt-10">
   <div *ngIf="flights.length === 0" class="text-center text-2xl font-bold h-52 text-gray-500">No flights available.</div>
   <h2 *ngIf="flights.length !== 0" class="text-2xl font-bold mb-6 text-center">Available Flights</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div *ngFor="let flight of flights" class="border border-gray-200 shadow-md p-4 rounded">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div *ngFor="let flight of flights" class="border border-gray-200 shadow-md p-6 rounded-xl bg-amber-50">
       <div class="flex justify-between">
          <div class="flex flex-col gap-2">
           <h3 class="text-2xl font-bold">{{ flight.airline }}</h3>

@@ -43,7 +43,17 @@ export class BookFlightComponent implements OnInit {
 
   submit() {
     const seats = this.passengers.length;
+    let isValid = true ;
+    this.passengers.forEach(p => {
+      if(p.age === '' || p.name === '' || p.passport === '') {
+         alert("Please fill all the details.") ;
+         isValid = false ;
+         return ;
+      }
+    });
 
+    if(!isValid) return;
+    
     this.bookingService.bookFlight(this.flight.id, seats).subscribe({
       next: () => {
         alert(`Booked ${seats} seat(s) successfully.`);
