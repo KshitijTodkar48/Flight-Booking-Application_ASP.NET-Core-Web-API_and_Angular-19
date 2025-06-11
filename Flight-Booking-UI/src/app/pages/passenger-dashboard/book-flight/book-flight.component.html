@@ -1,0 +1,27 @@
+<div class="max-w-4xl flex flex-col justify-center mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-4">Flight Booking</h2>
+    <div class="flex justify-between items-center my-4 px-16 py-2 border border-gray-300 rounded-lg shadow-md">
+         <div class="flex flex-col gap-4">
+          <h3 class="text-2xl font-bold">{{ flight.airline }}</h3>
+          <p class="text-lg font-semibold">{{ flight.departure }} → {{ flight.arrival }}</p>
+          <p class="text-lg">Departure: {{ flight.departureTime | date:'short' }}</p>
+          <p class="text-lg">Arrival: {{ flight.arrivalTime | date:'short' }}</p>
+          <p class="text-lg">Price: ₹{{ flight.price }}</p>
+        </div>
+        <div class="w-[50%]"> 
+          <img src="https://wallpapercave.com/wp/wp4128796.jpg" alt="" class="h-50 w-full rounded-lg">
+        </div>
+      </div>
+
+  <div *ngFor="let p of passengers; let i = index" class="border p-4 mb-4 rounded shadow">
+    <h4 class="font-semibold text-lg">Passenger {{ i + 1 }}</h4>
+    <input class="input mt-2" [(ngModel)]="p.name" placeholder="Full Name" />
+    <input class="input mt-2" type="number" [(ngModel)]="p.age" placeholder="Age" />
+    <input class="input mt-2" [(ngModel)]="p.passport" placeholder="Passport Number" />
+    <button *ngIf="passengers.length > 1" class="btn bg-red-600 hover:bg-red-700 mt-2" (click)="removePassenger(i)">Remove</button>
+  </div>
+
+  <button class="btn bg-green-600 hover:bg-green-700" (click)="addPassenger()">+ Add Passenger</button>
+
+  <button class="btn mt-4 w-full" (click)="submit()">Confirm Booking</button>
+</div>

@@ -4,6 +4,7 @@ import { BookingService } from '../../../services/booking.service';
 import { AuthService } from '../../../services/auth.service';
 import { FlightService } from '../../../services/flight.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-available-flights',
@@ -16,8 +17,8 @@ export class AvailableFlightsComponent implements OnInit {
 
   constructor(
     private flightService: FlightService,
-    private bookingService: BookingService,
-    public auth: AuthService // used in template
+    public auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -30,10 +31,11 @@ export class AvailableFlightsComponent implements OnInit {
   seatsToBook: { [flightId: number]: number } = {};
 
   book(flightId: number) {
-    const seats = this.seatsToBook[flightId] || 1; // default to 1 seat if none entered
-    this.bookingService.bookFlight(flightId, seats).subscribe({
-      next: () => alert('Flight booked successfully!'),
-      error: () => alert('Booking failed or not authorized.')
-    });
+    if(!this.auth.getToken()) {
+       this.router.navigate(['/login']) ;
+    }
+    else {
+       this.router.navigate([`/book/${flightId}`]) ;
+    }
   }
 }

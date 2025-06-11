@@ -21,5 +21,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent),
     canActivate: [authGuard, adminGuard]
   },
+  {
+    path: 'book/:flightId',
+    loadComponent: () =>
+      import('./pages/passenger-dashboard/book-flight/book-flight.component')
+        .then(m => m.BookFlightComponent),
+    canActivate: [authGuard, passengerGuard]
+  },
   { path: '', redirectTo: 'flights', pathMatch: 'full' }
 ];
