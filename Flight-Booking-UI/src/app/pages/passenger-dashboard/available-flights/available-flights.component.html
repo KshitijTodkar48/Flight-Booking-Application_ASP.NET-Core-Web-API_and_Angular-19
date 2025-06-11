@@ -15,7 +15,7 @@
           <img src="https://wallpapercave.com/wp/wp4128796.jpg" alt="" class="h-44 rounded-lg">
         </div>
       </div>
-      <button class="btn w-full cursor-pointer mt-4" (click)="book(flight.id)">
+      <button class="btn w-full cursor-pointer mt-4" *ngIf="!auth.isAdmin()" (click)="book(flight.id)">
         Book Now
       </button>
       
