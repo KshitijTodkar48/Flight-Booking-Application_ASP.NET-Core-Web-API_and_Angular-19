@@ -1,4 +1,4 @@
-<div class="max-w-5xl mx-auto mt-10 min-h-screen">
+<div class="max-w-7xl mx-auto mt-10 min-h-screen">
   <h2 class="text-2xl font-bold mb-6 text-center">My Bookings</h2>
 
   <div *ngIf="bookings.length === 0" class="text-center text-gray-500">
@@ -6,25 +6,21 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div *ngFor="let booking of bookings" class="border bg-amber-50 border-gray-200 shadow-md p-4 rounded-xl">
-      <div class="flex justify-between p-2">
-        <div class="flex flex-col gap-2">
-          <h3 class="text-2xl font-bold">Flight: {{ booking.flight.airline }}</h3>
-          <p class="text-lg">{{ booking.flight.departure }} → {{ booking.flight.arrival }}</p>
-          <p class="text-lg">Departure: {{ booking.flight.departureTime | date : "short" }}</p>
-          <p class="text-lg">Arrival: {{ booking.flight.arrivalTime | date : "short" }}</p>
-          <p class="text-lg">Seats: {{ booking.seatsBooked }}</p>
+    <div *ngFor="let booking of bookings" class="border bg-gray-50 border-gray-200 shadow-md p-4 rounded-xl">
+      <div class="flex justify-between">
+         <div class="flex flex-col gap-2">
+          <p class="text-2xl font-bold">{{ booking.flight.departure }} → {{ booking.flight.arrival }}</p>
+          <p class="text-xl font-bold text-amber-700">{{ booking.flight.airline }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Departure: </span> {{ booking.flight.departureTime | date:'short' }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Arrival: </span> {{ booking.flight.arrivalTime | date:'short' }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Fare: </span> ₹{{ booking.flight.price }} <span class="text-gray-500 font-semibold">(incl. taxes)</span></p>
         </div>
-        <div class="w-[45%]">
-          <img
-            src="https://wallpapercave.com/wp/wp4128796.jpg"
-            alt=""
-            class="h-44 rounded-lg"
-          />
+        <div class="w-[50%]"> 
+          <img src="https://wallpapercave.com/wp/wp4128796.jpg" alt="" class="h-44 rounded-lg">
         </div>
       </div>
       <button
-        class="mt-2 w-full font-semibold text-white py-2 px-4 rounded bg-red-500 hover:bg-red-600 cursor-pointer"
+        class="mt-4 text-lg w-full font-semibold text-white py-2 px-4 rounded bg-red-500 hover:bg-red-600 cursor-pointer"
         (click)="cancelBooking(booking.id)"
       >
         Cancel Booking

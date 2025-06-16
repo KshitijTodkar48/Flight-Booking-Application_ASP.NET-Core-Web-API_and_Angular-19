@@ -1,4 +1,4 @@
-<div class="bg-white p-4 shadow rounded mb-6 max-w-6xl mx-auto mt-12">
+<div class="bg-gray-100 p-4 shadow rounded mb-4 max-w-7xl mx-auto mt-12">
     <h3 class="text-xl font-bold mb-4">Search Flights</h3>
 
     <form class="grid grid-cols-1 md:grid-cols-3 gap-4" (ngSubmit)="onSubmit()">
@@ -6,9 +6,9 @@
     <input class="input" type="text" placeholder="To" [(ngModel)]="arrival" name="arrival" required />
     <input class="input" type="date" [(ngModel)]="date" name="date" required />
 
-    <div class="col-span-full flex gap-2 mt-2">
-        <button type="submit" class="btn cursor-pointer">Search</button>
-        <button type="button" class="btn cursor-pointer" (click)="clearSearch()">Clear Search</button>
+    <div class="col-span-full flex justify-end gap-4 mt-2">
+        <button type="button" class="btn w-40 cursor-pointer" (click)="clearSearch()">Clear Search</button>
+      <button type="submit" class="btn w-40 cursor-pointer">Search</button>
     </div>
     </form>
 </div>

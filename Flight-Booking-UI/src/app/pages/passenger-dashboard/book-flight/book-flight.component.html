@@ -1,19 +1,19 @@
-<div class="max-w-4xl flex flex-col justify-center mx-auto mt-10">
+<div class="max-w-3xl flex flex-col justify-center mx-auto mt-10">
   <h2 class="text-2xl font-bold mb-4 ml-2">Book flight</h2>
-    <div class="flex justify-between items-center my-4 px-12 py-6 border bg-amber-50 border-gray-300 rounded-xl shadow-md">
-         <div class="flex flex-col gap-4">
-          <h3 class="text-3xl font-bold">{{ flight.airline }}</h3>
-          <p class="text-xl font-semibold">{{ flight.departure }} → {{ flight.arrival }}</p>
-          <p class="text-xl">Departure: {{ flight.departureTime | date:'short' }}</p>
-          <p class="text-xl">Arrival: {{ flight.arrivalTime | date:'short' }}</p>
-          <p class="text-xl">Price: ₹{{ flight.price }}</p>
+    <div class="flex justify-between items-center my-4 px-8 py-4 border bg-gray-50 border-gray-300 rounded-xl shadow-md">
+         <div class="flex flex-col gap-3">
+          <p class="text-2xl font-bold">{{ flight.departure }} → {{ flight.arrival }}</p>
+          <p class="text-xl font-bold text-amber-700">{{ flight.airline }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Departure: </span> {{ flight.departureTime | date:'short' }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Arrival: </span> {{ flight.arrivalTime | date:'short' }}</p>
+          <p class="text-xl"> <span class="font-semibold text-blue-700 mr-1"> Fare: </span> ₹{{ flight.price }} <span class="text-gray-500 font-semibold">(incl. taxes)</span></p>
         </div>
         <div class="w-[50%]"> 
           <img src="https://wallpapercave.com/wp/wp4128796.jpg" alt="" class="h-50 w-full rounded-lg">
         </div>
-      </div>
+    </div>
 
-  <div *ngFor="let p of passengers; let i = index" class="bg-amber-50 p-6 mb-4 rounded-xl shadow">
+  <div *ngFor="let p of passengers; let i = index" class="bg-gray-50 p-6 mb-4 rounded-xl shadow">
     <h4 class="font-semibold text-lg">Passenger {{ i + 1 }}</h4>
     <input class="input mt-2" [(ngModel)]="p.name" placeholder="Full Name" />
     <input class="input mt-2" type="number" [(ngModel)]="p.age" placeholder="Age" />
