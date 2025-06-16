@@ -24,7 +24,7 @@ namespace FlightBooking.Repositories
                 .Where(f =>
                     f.Departure.ToLower() == dto.Departure.ToLower() &&
                     f.Arrival.ToLower() == dto.Arrival.ToLower() &&
-                    f.ArrivalTime.Date == dto.Date.Date)
+                    f.DepartureTime.Date == dto.Date.Date)
                 .ToListAsync();
         }
 
