@@ -29,4 +29,9 @@ export class FlightService {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
+
+  searchFlights(criteria: { departure: string; arrival: string; date: Date }) {
+    const url = `${this.apiUrl}/search`;
+    return this.http.post<any[]>(url, criteria);
+  }
 }
