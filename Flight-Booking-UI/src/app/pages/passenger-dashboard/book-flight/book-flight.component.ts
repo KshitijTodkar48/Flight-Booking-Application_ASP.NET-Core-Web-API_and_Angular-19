@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FlightService } from '../../../services/flight.service';
 import { BookingService } from '../../../services/booking.service';
 import { Router } from '@angular/router';
@@ -41,19 +41,13 @@ export class BookFlightComponent implements OnInit {
     this.passengers.splice(index, 1);
   }
 
-  submit() {
-    const seats = this.passengers.length;
-    let isValid = true ;
-    this.passengers.forEach(p => {
-      if(p.age === '' || p.name === '' || p.passport === '') {
-         alert("Please fill all the details.") ;
-         isValid = false ;
-         return ;
-      }
-    });
+   submitForm(form: NgForm) {
+    if (form.invalid) {
+      form.control.markAllAsTouched(); // Show errors
+      return;
+    }
 
-    if(!isValid) return;
-    
+    const seats = this.passengers.length;
     this.bookingService.bookFlight(this.flight.id, seats).subscribe({
       next: () => {
         alert(`Booked ${seats} seat(s) successfully.`);
@@ -64,4 +58,5 @@ export class BookFlightComponent implements OnInit {
       }
     });
   }
+
 }

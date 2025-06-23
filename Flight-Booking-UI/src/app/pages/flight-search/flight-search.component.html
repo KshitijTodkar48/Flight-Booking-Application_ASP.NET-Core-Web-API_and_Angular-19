@@ -4,7 +4,7 @@
     <form class="grid grid-cols-1 md:grid-cols-3 gap-4" (ngSubmit)="onSubmit()">
     <input class="input" type="text" placeholder="From" [(ngModel)]="departure" name="departure" required />
     <input class="input" type="text" placeholder="To" [(ngModel)]="arrival" name="arrival" required />
-    <input class="input" type="date" [(ngModel)]="date" name="date" required />
+    <input class="input" type="date" [(ngModel)]="date" [min]="minDate" name="date" required />
 
     <div class="col-span-full flex justify-end gap-4 mt-2">
         <button type="button" class="btn w-40 cursor-pointer" (click)="clearSearch()">Clear Search</button>

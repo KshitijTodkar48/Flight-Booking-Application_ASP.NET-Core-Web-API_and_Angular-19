@@ -12,16 +12,73 @@
           <img src="https://wallpapercave.com/wp/wp4128796.jpg" alt="" class="h-50 w-full rounded-lg">
         </div>
     </div>
+  
+    <form #bookingForm="ngForm" (ngSubmit)="submitForm(bookingForm)">
+        <div *ngFor="let p of passengers; let i = index" class="bg-gray-50 p-6 mb-4 rounded-xl shadow">
+        <h4 class="font-semibold text-lg">Passenger {{ i + 1 }}</h4>
 
-  <div *ngFor="let p of passengers; let i = index" class="bg-gray-50 p-6 mb-4 rounded-xl shadow">
-    <h4 class="font-semibold text-lg">Passenger {{ i + 1 }}</h4>
-    <input class="input mt-2" [(ngModel)]="p.name" placeholder="Full Name" />
-    <input class="input mt-2" type="number" [(ngModel)]="p.age" placeholder="Age" />
-    <input class="input mt-2" [(ngModel)]="p.passport" placeholder="Passport Number" />
-    <button *ngIf="passengers.length > 1" class="btn mt-4 font-semibold" (click)="removePassenger(i)">Remove</button>
-  </div>
+        <!-- Full Name -->
+        <input
+          class="input mt-2"
+          [(ngModel)]="p.name"
+          name="name{{i}}"
+          placeholder="Full Name"
+          required
+          maxlength="50"
+          pattern="[A-Za-z ]+"
+          #name="ngModel"
+        />
+        <div class="text-red-600 text-sm mt-1" *ngIf="name.invalid && name.touched">
+          Please enter a valid name (max 50 letters & only alphabets).
+        </div>
 
-  <button class="btn font-semibold text-lg" (click)="addPassenger()">+ Add Passenger</button>
+        <!-- Age -->
+        <input
+          class="input mt-2"
+          type="number"
+          [(ngModel)]="p.age"
+          name="age{{i}}"
+          placeholder="Age"
+          required
+          min="1"
+          max="120"
+          #age="ngModel"
+        />
+        <div class="text-red-600 text-sm mt-1" *ngIf="age.invalid && age.touched">
+          Age must be between 1 and 120.
+        </div>
 
-  <button class="btn mt-4 w-full font-semibold text-lg" (click)="submit()">Confirm Booking</button>
+        <!-- Passport Number -->
+        <input
+          class="input mt-2"
+          [(ngModel)]="p.passport"
+          name="passport{{i}}"
+          placeholder="Passport Number"
+          required
+          pattern="^[0-9]{8,12}$"
+          maxlength="12"
+          #passport="ngModel"
+        />
+        <div class="text-red-600 text-sm mt-1" *ngIf="passport.invalid && passport.touched">
+          Passport must be 8–12 digits only.
+        </div>
+
+        <button *ngIf="passengers.length > 1" class="btn mt-4 font-semibold" (click)="removePassenger(i)">
+          Remove
+        </button>
+    </div>
+
+      <button class="btn font-semibold text-lg" (click)="addPassenger()">+ Add Passenger</button>
+
+      <button
+        type="submit"
+        class="btn mt-4 w-full font-semibold text-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
+        [disabled]="bookingForm.invalid"
+      >
+        Confirm Booking
+      </button>
+
+    </form>
+
+  
 </div>
