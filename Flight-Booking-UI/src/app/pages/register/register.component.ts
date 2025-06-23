@@ -31,7 +31,10 @@ export class RegisterComponent {
           alert('Registration successful');
           this.router.navigate(['/login']);
         },
-        error: () => alert('Registration failed'),
+        error: (err) => {
+          const message = err?.error?.message || 'Registration failed';
+          alert(message);
+        }
       });
   }
 }

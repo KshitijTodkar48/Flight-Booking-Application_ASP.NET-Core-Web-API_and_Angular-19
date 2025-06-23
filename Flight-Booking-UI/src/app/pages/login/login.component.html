@@ -1,8 +1,41 @@
 <div class="max-w-md mx-auto mb-10 p-10 h-80 border-gray-300 rounded-xl shadow-md bg-gray-50">
   <h2 class="text-3xl font-bold mb-4 text-center">Login</h2>
-  <form (ngSubmit)="onSubmit()" class="flex flex-col justify-evenly h-[80%]">
-    <input class="input" [(ngModel)]="username" name="username" placeholder="Username" required />
-    <input class="input mt-2" type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
-    <button class="btn w-full mt-4" type="submit">Login</button>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col justify-evenly h-[80%]">
+
+    <input
+      class="input"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Username"
+      required
+      minlength="5"
+      maxlength="30"
+      #uname="ngModel"
+    />
+    <div class="text-red-600 text-sm" *ngIf="uname.invalid && uname.touched">
+      Username is required (5–30 characters).
+    </div>
+
+    <input
+      class="input mt-2"
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password"
+      required
+      minlength="6"
+      #pass="ngModel"
+    />
+    <div class="text-red-600 text-sm" *ngIf="pass.invalid && pass.touched">
+      Password is required (min 6 characters).
+    </div>
+
+    <button
+    type="submit"
+    [disabled]="loginForm.invalid"
+    class="btn w-full mt-4 cursor-pointer disabled:cursor-not-allowed"
+    >
+      Login
+    </button>
   </form>
 </div>

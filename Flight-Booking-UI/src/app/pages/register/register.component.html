@@ -1,20 +1,35 @@
 <div class="max-w-md mx-auto mb-6 p-10 rounded-xl shadow-md bg-gray-50">
   <h2 class="text-3xl font-bold mb-6 text-center">Register</h2>
-  <form (ngSubmit)="onSubmit()">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+
     <input
       class="input"
       [(ngModel)]="username"
       name="username"
       placeholder="Username"
       required
+      minlength="5"
+      maxlength="30"
+      #uname="ngModel"
     />
+    <div class="text-red-600 text-sm" *ngIf="uname.invalid && uname.touched">
+      Username is required (5–30 characters).
+    </div>
+
     <input
       class="input mt-2"
       [(ngModel)]="email"
       name="email"
       placeholder="Email"
       required
+      email
+      pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+      #emailField="ngModel"
     />
+    <div class="text-red-600 text-sm" *ngIf="emailField.invalid && emailField.touched">
+      Please enter a valid email address.
+    </div>
+
     <input
       class="input mt-2"
       type="password"
@@ -22,12 +37,34 @@
       name="password"
       placeholder="Password"
       required
+      minlength="6"
+      #pass="ngModel"
     />
-    <select class="input mt-2" [(ngModel)]="role" name="role" required>
+    <div class="text-red-600 text-sm" *ngIf="pass.invalid && pass.touched">
+      Password is required (min 6 characters).
+    </div>
+
+    <select
+      class="input mt-2"
+      [(ngModel)]="role"
+      name="role"
+      required
+      #roleField="ngModel"
+    >
       <option value="" disabled selected>Select Role</option>
       <option value="Passenger">Passenger</option>
       <option value="Admin">Admin</option>
     </select>
-    <button class="btn w-full mt-4" type="submit">Register</button>
+    <div class="text-red-600 text-sm" *ngIf="roleField.invalid && roleField.touched">
+      Please select a role.
+    </div>
+
+    <button
+      class="btn mt-4 w-full disabled:cursor-not-allowed cursor-pointer"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
   </form>
 </div>
