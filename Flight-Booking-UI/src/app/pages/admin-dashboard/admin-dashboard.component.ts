@@ -22,8 +22,10 @@ export class AdminDashboardComponent implements OnInit {
     arrival: '',
     departureTime: '',
     arrivalTime: '',
-    price: 0
+    price: 100
   };
+
+  minDateTime = '';
 
   constructor(
     private flightService: FlightService,
@@ -31,6 +33,9 @@ export class AdminDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // Adjust for local timezone
+    this.minDateTime = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:MM"
     this.loadData();
   }
 

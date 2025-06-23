@@ -1,5 +1,4 @@
 <div class="max-w-6xl mx-auto mt-10 space-y-10">
-
   <h2 class="text-3xl font-bold ml-2">Admin Dashboard</h2>
 
   <!-- Add/Edit Flight Form -->
@@ -8,32 +7,135 @@
       {{ editingId ? 'Edit Flight' : 'Add New Flight' }}
     </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <input class="input" [(ngModel)]="newFlight.airline" placeholder="Airline" />
-      <input class="input" [(ngModel)]="newFlight.departure" placeholder="From" />
-      <input class="input" [(ngModel)]="newFlight.arrival" placeholder="To" />
-      <input class="input" type="datetime-local" [(ngModel)]="newFlight.departureTime" />
-      <input class="input" type="datetime-local" [(ngModel)]="newFlight.arrivalTime" />
-      <input class="input" type="number" [(ngModel)]="newFlight.price" placeholder="Price" />
+    <form #flightForm="ngForm" (ngSubmit)="submitFlight()" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Airline -->
+      <div>
+         <input
+          class="input"
+          [(ngModel)]="newFlight.airline"
+          name="airline"
+          placeholder="Airline"
+          required
+          maxlength="50"
+          #airline="ngModel"
+        />
+        <div class="text-red-600 text-sm col-span-2" *ngIf="airline.invalid && airline.touched">
+          Airline is required (max 50 characters).
+        </div>
+      </div>
+
+      <!-- From -->
+      <div>
+          <input
+          class="input"
+          [(ngModel)]="newFlight.departure"
+          name="departure"
+          placeholder="From"
+          required
+          maxlength="30"
+          pattern="[A-Za-z ]+"
+          #departure="ngModel"
+        />
+        <div class="text-red-600 text-sm col-span-2" *ngIf="departure.invalid && departure.touched">
+          Departure location is required and should contain only letters.
+        </div>
+      </div>
+
+      <!-- To -->
+      <div>
+         <input
+          class="input"
+          [(ngModel)]="newFlight.arrival"
+          name="arrival"
+          placeholder="To"
+          required
+          maxlength="30"
+          pattern="[A-Za-z ]+"
+          #arrival="ngModel"
+        />
+        <div class="text-red-600 text-sm col-span-2" *ngIf="arrival.invalid && arrival.touched">
+          Arrival location is required and should contain only letters.
+        </div>
+      </div>
+
+      <!-- Departure Time -->
+      <input
+        class="input"
+        type="datetime-local"
+        [(ngModel)]="newFlight.departureTime"
+        name="departureTime"
+        [min]="minDateTime"
+        required
+        #departureTime="ngModel"
+      />
+
+      <!-- Arrival Time -->
+      <input
+        class="input"
+        type="datetime-local"
+        [(ngModel)]="newFlight.arrivalTime"
+        name="arrivalTime"
+        [min]="minDateTime"
+        required
+        #arrivalTime="ngModel"
+      />
+
+      <!-- Price -->
+      <div>
+          <input
+            class="input"
+            type="number"
+            [(ngModel)]="newFlight.price"
+            name="price"
+            placeholder="Fare"
+            required
+            min="100"
+            #price="ngModel"
+          />
+          <div class="text-red-600 text-sm col-span-2" *ngIf="price.invalid && price.touched">
+            Fare must be at least ₹100.
+          </div>
+      </div>
+    </form>
+
+    <!-- Error if Departure == Arrival -->
+    <div
+      class="text-red-600 text-sm mt-2"
+      *ngIf="newFlight.departure && newFlight.arrival && newFlight.departure === newFlight.arrival"
+    >
+      Departure and Arrival cannot be the same.
     </div>
 
+    <!-- Submit / Cancel Buttons -->
     <div class="mt-4 flex gap-2">
-      <button class="btn bg-blue-600 hover:bg-blue-700" (click)="submitFlight()">
+      <button
+        class="btn cursor-pointer disabled:cursor-not-allowed"
+        type="submit"
+        [disabled]="
+          flightForm.invalid || newFlight.departure === newFlight.arrival
+        "
+        (click)="submitFlight()"
+      >
         {{ editingId ? 'Update Flight' : 'Add Flight' }}
       </button>
-      <button *ngIf="editingId" class="text-white py-2 px-4 rounded bg-gray-500 hover:bg-gray-600" (click)="resetForm()">
+
+      <button
+        *ngIf="editingId"
+        class="text-white py-2 px-4 rounded bg-gray-500 hover:bg-gray-600"
+        (click)="resetForm()"
+      >
         Cancel Edit
       </button>
     </div>
   </div>
 
-  <!-- All Flights List -->
+  <!-- All Flights -->
   <div class="p-6 rounded-xl shadow bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">All Flights</h3>
     <ul>
       <li *ngFor="let f of flights" class="border-b py-2 flex justify-between items-center">
         <div>
-          ✈️ {{ f.airline }} — {{ f.departure }} → {{ f.arrival }}  
+          ✈️ {{ f.airline }} — {{ f.departure }} → {{ f.arrival }}
           <span class="text-sm text-gray-500">({{ f.departureTime | date:'short' }})</span>
         </div>
         <div class="space-x-2">
@@ -44,7 +146,7 @@
     </ul>
   </div>
 
-  <!-- All Bookings List -->
+  <!-- All Bookings -->
   <div class="p-6 rounded-xl shadow bg-gray-50">
     <h3 class="text-lg font-semibold mb-2">All Bookings</h3>
     <ul>
