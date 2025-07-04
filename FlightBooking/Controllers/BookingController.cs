@@ -1,5 +1,4 @@
 ﻿using FlightBooking.DTOs;
-using FlightBooking.Models;
 using FlightBooking.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +42,22 @@ namespace FlightBooking.Controllers
             await _service.AddBookingAsync(dto, userId);
             return Ok(new { message = "Flight booked successfully." });
         }
+
+        [HttpPut("checkin/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CheckIn(int id)
+        {
+            try
+            {
+                await _service.CheckInAsync(id);
+                return Ok(new { message = "Passenger checked in successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Passenger")]

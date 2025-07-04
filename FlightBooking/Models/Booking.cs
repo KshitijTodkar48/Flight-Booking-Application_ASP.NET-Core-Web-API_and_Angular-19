@@ -10,6 +10,7 @@ namespace FlightBooking.Models
 
         public DateTime BookingTime { get; set; } = DateTime.UtcNow;
         public int SeatsBooked { get; set; }
+        public bool CheckedIn { get; set; } = false;
 
         public Flight Flight { get; set; }
         public User Passenger { get; set; }

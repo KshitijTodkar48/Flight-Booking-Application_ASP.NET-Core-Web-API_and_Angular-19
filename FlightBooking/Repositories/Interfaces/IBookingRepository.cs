@@ -9,6 +9,7 @@ namespace FlightBooking.Repositories.Interfaces
         Task<Booking?> GetByIdAsync(int id);
         Task AddAsync(Booking booking);
         Task DeleteAsync(int id);
+        Task CheckInAsync(int id);
     }
 
 }

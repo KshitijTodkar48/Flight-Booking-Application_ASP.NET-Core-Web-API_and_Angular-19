@@ -38,6 +38,16 @@ namespace FlightBooking.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task CheckInAsync(int id)
+        {
+            var booking = await _context.Bookings.FindAsync(id);
+            if (booking == null) throw new Exception("Booking not found");
+
+            booking.CheckedIn = true;
+            await _context.SaveChangesAsync();
+        }
+
     }
 
 }

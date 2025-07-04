@@ -9,6 +9,7 @@ namespace FlightBooking.Services.Interfaces
         Task<IEnumerable<Booking>> GetBookingsByPassengerAsync(int passengerId);
         Task AddBookingAsync(BookingCreateDto dto, int passengerId);
         Task CancelBookingAsync(int id, int passengerId);
+        Task CheckInAsync(int id);
     }
 
 }
