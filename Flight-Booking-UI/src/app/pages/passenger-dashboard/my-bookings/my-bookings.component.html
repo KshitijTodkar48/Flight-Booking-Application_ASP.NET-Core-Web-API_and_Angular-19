@@ -6,7 +6,7 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div *ngFor="let booking of bookings" class="border bg-gray-50 border-gray-200 shadow-md p-4 rounded-xl">
+    <div *ngFor="let booking of bookings" class="border bg-gray-50 border-gray-200 shadow-md py-4 px-6 rounded-xl">
       <div class="flex justify-between">
          <div class="flex flex-col gap-2">
           <p class="text-2xl font-bold">{{ booking.flight.departure }} → {{ booking.flight.arrival }}</p>
@@ -22,9 +22,18 @@
       <button
         class="mt-4 text-lg w-full font-semibold text-white py-2 px-4 rounded bg-red-500 hover:bg-red-600 cursor-pointer"
         (click)="cancelBooking(booking.id)"
+        *ngIf = "!booking.checkedIn"
       >
         Cancel Booking
       </button>
+
+      <button
+        class="mt-4 text-lg w-full font-semibold text-white py-2 px-4 rounded bg-green-600"
+        *ngIf = "booking.checkedIn"
+      >
+        Checked In
+      </button>
+
     </div>
   </div>
 </div>

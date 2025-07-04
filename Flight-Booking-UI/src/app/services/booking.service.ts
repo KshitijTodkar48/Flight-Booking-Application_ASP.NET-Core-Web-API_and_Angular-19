@@ -33,7 +33,6 @@ export class BookingService {
     return this.http.get<any[]>(this.apiUrl + '/all', { headers }); // Adjust endpoint if needed
   }
 
-
   checkIn(id: number) {
     const token = this.auth.getToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
