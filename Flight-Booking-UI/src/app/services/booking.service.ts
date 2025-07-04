@@ -32,4 +32,13 @@ export class BookingService {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.get<any[]>(this.apiUrl + '/all', { headers }); // Adjust endpoint if needed
   }
+
+
+  checkIn(id: number) {
+    const token = this.auth.getToken();
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+    return this.http.put(`${this.apiUrl}/checkin/${id}`, null, { headers });
+  }
+
 }

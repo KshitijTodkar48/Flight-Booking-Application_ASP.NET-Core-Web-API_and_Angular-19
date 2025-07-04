@@ -121,4 +121,14 @@ export class AdminDashboardComponent implements OnInit {
       error: () => alert('Deletion failed')
     });
   }
+
+  checkInBooking(id: number) {
+    this.bookingService.checkIn(id).subscribe({
+      next: () => {
+        const booking = this.bookings.find(b => b.id === id);
+        if (booking) booking.checkedIn = true;
+      },
+      error: () => alert('Failed to check in passenger.')
+    });
+  }
 }
