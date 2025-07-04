@@ -30,6 +30,11 @@ namespace FlightBooking.Services
         public async Task<IEnumerable<Booking>> GetBookingsByPassengerAsync(int passengerId) =>
             await _repo.GetByPassengerIdAsync(passengerId);
 
+        public async Task CheckInAsync(int id)
+        {
+            await _repo.CheckInAsync(id);
+        }
+
         public async Task AddBookingAsync(BookingCreateDto dto, int passengerId)
         {
             try
